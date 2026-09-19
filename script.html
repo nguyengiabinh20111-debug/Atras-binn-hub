@@ -13,22 +13,25 @@
             font-family: 'Poppins', sans-serif;
         }
         body {
-            background-color: #0f111a;
-            color: #ffffff;
-            padding: 15px;
+            /* Nền sáng, màu sắc hiện đại, pha trộn xanh neon và tím khói gaming */
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #f8fafc;
+            padding: 20px;
+            min-height: 100vh;
         }
         header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         .logo-container {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 12px auto;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px auto;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid #00ffcc;
-            box-shadow: 0 0 15px rgba(0,255,204,0.4);
+            border: 3px solid #38bdf8;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+            background: #1e293b;
         }
         .logo-container img {
             width: 100%;
@@ -36,117 +39,119 @@
             object-fit: cover;
         }
         header h1 {
-            font-size: 22px;
-            color: #00ffcc;
+            font-size: 26px;
+            color: #38bdf8;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(0,255,204,0.4);
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
         }
         header p {
-            font-size: 12px;
-            color: #8b9bb4;
+            font-size: 13px;
+            color: #94a3b8;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
         }
         .script-card {
-            background: linear-gradient(145deg, #181b28, #131520);
-            border: 1px solid #232738;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            transition: transform 0.2s, border-color 0.2s;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
         .script-card:hover {
-            border-color: #00ffcc;
-            transform: translateY(-2px);
+            border-color: #38bdf8;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(56, 189, 248, 0.2);
         }
         .script-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
-            color: #ffcc00;
-            margin-bottom: 8px;
+            color: #fbbf24;
+            margin-bottom: 10px;
             text-transform: capitalize;
         }
         .script-info {
             display: flex;
             justify-content: space-between;
             font-size: 12px;
-            color: #a0aec0;
+            color: #cbd5e1;
             margin-bottom: 10px;
-            background: #12141d;
+            background: rgba(15, 23, 42, 0.6);
             padding: 8px 12px;
-            border-radius: 6px;
+            border-radius: 8px;
         }
         .vote-badge {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
             font-weight: 500;
         }
-        .vote-like { color: #2ecc71; }
-        .vote-dislike { color: #e74c3c; }
+        .vote-like { color: #4ade80; }
+        .vote-dislike { color: #f87171; }
         .code-box {
-            background: #0b0c10;
-            border: 1px solid #1f2430;
-            border-radius: 6px;
-            padding: 10px;
+            background: #090d16;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 12px;
             font-family: monospace;
-            font-size: 11px;
-            color: #00ffcc;
+            font-size: 12px;
+            color: #38bdf8;
             word-break: break-all;
-            max-height: 80px;
+            max-height: 90px;
             overflow-y: auto;
             margin-bottom: 12px;
         }
         .copy-btn {
-            background: linear-gradient(135deg, #00ffcc, #00bfff);
-            color: #000;
+            background: linear-gradient(135deg, #38bdf8, #2563eb);
+            color: #ffffff;
             border: none;
-            padding: 9px 15px;
+            padding: 10px 15px;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 13px;
             border-radius: 8px;
             cursor: pointer;
             width: 100%;
-            transition: opacity 0.2s, transform 0.1s;
-            box-shadow: 0 4px 10px rgba(0,255,204,0.2);
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
         }
         .copy-btn:active {
             opacity: 0.8;
             transform: scale(0.98);
         }
-        /* Phân trang (Pagination) */
+        /* Phân trang */
         .pagination {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin: 25px 0;
+            margin: 30px 0;
             flex-wrap: wrap;
         }
         .page-btn {
-            background: #181b28;
-            color: #ffffff;
-            border: 1px solid #232738;
-            padding: 8px 14px;
-            border-radius: 6px;
+            background: #1e293b;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 13px;
             font-weight: 600;
             transition: all 0.2s;
         }
         .page-btn:hover {
-            border-color: #00ffcc;
-            color: #00ffcc;
+            border-color: #38bdf8;
+            color: #38bdf8;
         }
         .page-btn.active {
-            background: linear-gradient(135deg, #00ffcc, #00bfff);
-            color: #000;
+            background: linear-gradient(135deg, #38bdf8, #2563eb);
+            color: #ffffff;
             border-color: transparent;
-            box-shadow: 0 0 10px rgba(0,255,204,0.4);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
         }
     </style>
 </head>
@@ -155,8 +160,8 @@
     <div class="container">
         <header>
             <div class="logo-container">
-                <!-- Sử dụng hình ảnh logo Atras | Binn của ní -->
-                <img src="1000006294.png" alt="Atras | Binn Logo" onerror="this.src='https://via.placeholder.com/90?text=BIN'">
+                <!-- Thay link ảnh vào đây hoặc tên file ảnh trên github của ní -->
+                <img src="1000006294.png" alt="Atras | Binn Logo" onerror="this.src='https://i.imgur.com/7A26wzU.png'">
             </div>
             <h1>BIN HUB Scripts</h1>
             <p>Kho lưu trữ script tổng hợp giao diện cực chất</p>
@@ -220,7 +225,7 @@
             "limbo hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet('https://limbohub.my.id/loader.lua'))()", "likes": 2, "dislikes": 6 }
         };
 
-        const itemsPerPage = 8; // Số script hiển thị trên mỗi trang
+        const itemsPerPage = 8;
         let currentPage = 1;
         const scriptKeys = Object.keys(scriptData);
         const totalPages = Math.ceil(scriptKeys.length / itemsPerPage);
@@ -272,17 +277,16 @@
             navigator.clipboard.writeText(text).then(() => {
                 let originalText = btn.innerText;
                 btn.innerText = '✅ Đã Copy Thành Công!';
-                btn.style.background = '#2ecc71';
-                btn.style.color = '#fff';
+                btn.style.background = '#4ade80';
+                btn.style.color = '#000';
                 setTimeout(() => {
                     btn.innerText = originalText;
-                    btn.style.background = 'linear-gradient(135deg, #00ffcc, #00bfff)';
-                    btn.style.color = '#000';
+                    btn.style.background = 'linear-gradient(135deg, #38bdf8, #2563eb)';
+                    btn.style.color = '#fff';
                 }, 1500);
             });
         }
 
-        // Chạy lần đầu tiên
         renderPage(1);
     </script>
 </body>
