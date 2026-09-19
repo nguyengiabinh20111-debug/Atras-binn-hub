@@ -56,7 +56,6 @@
             margin-bottom: 25px;
         }
 
-        /* Khóa / Mở khóa overlay */
         .lock-screen {
             display: flex;
             flex-direction: column;
@@ -108,7 +107,6 @@
             opacity: 0.9;
         }
 
-        /* Phần Script sau khi mở khóa */
         #mainContent {
             display: none;
             text-align: left;
@@ -181,17 +179,15 @@
             <h1>BIN HUB</h1>
             <p class="subtitle">Ultimate Roblox Script Hub</p>
 
-            <!-- MÀN HÌNH KHÓA (YÊU CẦU DISCORD) -->
+            <!-- MÀN HÌNH KHÓA -->
             <div id="lockScreen" class="lock-screen">
                 <div style="font-size: 3rem; margin-bottom: -10px;">🔒</div>
                 <p>Bạn cần tham gia Server Discord chính thức để mở khóa toàn bộ mã nguồn Script VIP.</p>
                 
-                <!-- Bấm nút này sẽ mở link Discord VÀ tự động ghi nhận -->
                 <a href="https://discord.gg/uqhEpzXy9q" target="_blank" class="btn btn-discord" onclick="joinDiscord()">
                     🚀 1. Tham Gia Server Discord
                 </a>
 
-                <!-- Nút xác nhận mở khóa ngay -->
                 <button class="btn btn-unlock" onclick="unlockScript()">
                     ✨ 2. Tôi Đã Vào - Mở Khóa Ngay
                 </button>
@@ -201,7 +197,7 @@
                 </p>
             </div>
 
-            <!-- NỘI DUNG SCRIPT (HIỆN KHI ĐÃ MỞ KHÓA) -->
+            <!-- NỘI DUNG SCRIPT -->
             <div id="mainContent">
                 <div class="success-badge">✅ Đã mở khóa thành công kho Script!</div>
 
@@ -229,21 +225,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/ref
                 return;
             }
 
-            // Lưu trạng thái vào bộ nhớ máy
-            localStorage.setItem('binhub_vip_unlocked', 'true');
-            showContent();
-        }
-
-        function showContent() {
+            // Ẩn màn hình khóa, hiện nội dung (Không lưu vào bộ nhớ máy nữa)
             document.getElementById('lockScreen').style.display = 'none';
             document.getElementById('mainContent').style.display = 'block';
-        }
-
-        // Tự động kiểm tra nếu đã mở khóa trước đó
-        window.onload = function() {
-            if (localStorage.getItem('binhub_vip_unlocked') === 'true') {
-                showContent();
-            }
         }
 
         function copyCode() {
