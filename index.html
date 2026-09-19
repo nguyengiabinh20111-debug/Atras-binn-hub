@@ -3,231 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIN HUB - Kho Script Tổng Hợp</title>
+    <title>BIN HUB - Kho Script & Xác Thực Key</title>
     <style>
         body { 
             background: #0b0f19; 
             color: #fff; 
             font-family: 'Poppins', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
             margin: 0; 
-            padding: 20px; 
         }
         .container { 
-            max-width: 900px; 
-            margin: 0 auto; 
+            background: #131b2e; 
+            padding: 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
+            border: 1px solid rgba(99, 102, 241, 0.3); 
+            max-width: 450px; 
+            width: 90%; 
         }
         h1 { 
-            text-align: center; 
             background: linear-gradient(45deg, #6366f1, #a855f7); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            font-size: 2.2rem;
-            margin-bottom: 5px;
+            margin-bottom: 10px; 
         }
-        .subtitle {
-            text-align: center;
-            color: #9ca3af;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
+        p { color: #9ca3af; font-size: 0.85rem; margin-bottom: 20px; }
+        .btn { 
+            background: #5865F2; color: white; padding: 12px 20px; border-radius: 10px; 
+            text-decoration: none; font-weight: bold; display: block; margin-bottom: 15px; 
+            transition: 0.3s; border: none; width: 100%; cursor: pointer; box-sizing: border-box; 
         }
-        .search-box {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            background: #131b2e;
-            border: 1px solid #1e293b;
-            color: white;
-            font-size: 1rem;
-            margin-bottom: 25px;
-            box-sizing: border-box;
-            outline: none;
-            transition: 0.3s;
+        .btn:hover { background: #4752c4; }
+        .btn-key { background: #f59e0b; }
+        .btn-key:hover { background: #d97706; }
+        input { 
+            width: 100%; padding: 12px; border-radius: 10px; background: #05070a; 
+            border: 1px solid #1e293b; color: white; margin-bottom: 15px; 
+            box-sizing: border-box; text-align: center; font-size: 1rem; 
         }
-        .search-box:focus {
-            border-color: #6366f1;
-        }
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 20px; 
-        }
-        .card { 
-            background: #131b2e; 
-            padding: 20px; 
-            border-radius: 16px; 
-            border: 1px solid rgba(99, 102, 241, 0.2); 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4); 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: 0.3s;
-        }
-        .card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(99, 102, 241, 0.6);
-        }
-        .card h3 { 
-            margin: 0 0 10px 0; 
-            font-size: 1.1rem; 
-            color: #f3f4f6;
-            text-transform: capitalize;
-        }
-        .stats {
-            font-size: 0.8rem;
-            color: #9ca3af;
-            margin-bottom: 12px;
-            display: flex;
-            gap: 15px;
-        }
-        .btn-copy { 
-            background: #6366f1; 
-            color: white; 
-            border: none; 
-            padding: 10px; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            width: 100%; 
-            transition: 0.3s; 
-            font-size: 0.9rem;
-        }
-        .btn-copy:hover { background: #4f46e5; }
-        .btn-copied { background: #10b981 !important; }
-        #toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #10b981;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            display: none;
-            z-index: 1000;
-        }
+        .btn-submit { background: #10b981; color: white; border: none; cursor: pointer; width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; transition: 0.3s; }
+        .btn-submit:hover { background: #059669; }
+        
+        /* Giao diện kho script ẩn đi lúc đầu */
+        #script-section { display: none; text-align: left; }
+        .script-box { background: #05070a; padding: 15px; border-radius: 10px; border: 1px solid #1e293b; margin-bottom: 15px; }
+        .script-title { font-weight: bold; color: #34d399; margin-bottom: 5px; }
+        textarea { width: 100%; height: 70px; background: #131b2e; color: #fff; border: 1px solid #374151; border-radius: 6px; padding: 8px; font-family: monospace; resize: none; box-sizing: border-box; }
+        .copy-btn { background: #6366f1; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 5px; width: 100%; }
+        .copy-btn:hover { background: #4f46e5; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>BIN HUB</h1>
-        <div class="subtitle">Kho script tổng hợp cho Roblox</div>
+
+    <div class="container" id="auth-container">
+        <h1>BIN HUB SYSTEM</h1>
+        <p>Vui lòng nhập Key hợp lệ để mở khóa kho Script!</p>
         
-        <input type="text" id="searchBox" class="search-box" placeholder="🔍 Tìm kiếm script..." onkeyup="filterScripts()">
-        
-        <div class="grid" id="scriptGrid"></div>
+        <input type="text" id="key-input" placeholder="Nhập Key của bạn vào đây...">
+        <button class="btn btn-key" onclick="window.open('https://discord.gg/uqhEpzXy9q', '_blank')">Lấy Key Từ Bot Discord</button>
+        <button class="btn-submit" onclick="checkKey()">Xác Nhận Key</button>
+        <p id="error-msg" style="color: #ef4444; margin-top: 10px; display: none;">Sai Key rồi bạn ơi!</p>
     </div>
 
-    <div id="toast">Đã copy mã lệnh thành công!</div>
+    <div class="container" id="script-section">
+        <h1>BIN HUB VIP</h1>
+        <p>Mở khóa thành công! Dưới đây là các Script độc quyền:</p>
+        
+        <div class="script-box">
+            <div class="script-title">⚡ Blox Fruits - Auto Farm</div>
+            <textarea readonly>getgenv().team = "Pirates"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Bloxfruits.lua"))()</textarea>
+            <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
+        </div>
+
+        <div class="script-box">
+            <div class="script-title">⚡ Solix Hub (Trộm Một Quả Trứng)</div>
+            <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Solix.lua"))()</textarea>
+            <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
+        </div>
+        
+        <button class="btn" style="background:#374151; margin-top:10px;" onclick="location.reload()">Khóa Lại (Đổi Key)</button>
+    </div>
 
     <script>
-        // Bảo vệ trang web: Nếu chưa đăng nhập sẽ đá văng về trang chủ
-        if (localStorage.getItem('binhub_auth') !== 'true') {
-            window.location.href = 'index.html';
-        }
+        // Danh sách các Key hợp lệ (Bạn có thể thêm key tùy ý vào đây)
+        const validKeys = ["BIN-VIP-2026", "BACON-HUB-FREE", "BINHUB123"];
 
-        const scriptsData = {
-          "quantum blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua\"))()", "likes": 4, "dislikes": 0 },
-          "banana hub blox fruit": { "code": "repeat wait() until game:IsLoaded() and game.Players.LocalPlayer getgenv().Team = \"Marines\" loadstring(game:HttpGet(\"https://raw.githubusercontent.com/obiyeueim/vthangsitink/main/BananaHub.lua\"))()", "likes": 5, "dislikes": 0 },
-          "hoshi (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/napun87/stealanegg/refs/heads/main/hosi.lua\"))()", "likes": 1, "dislikes": 0 },
-          "solix hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/napun87/script/refs/heads/main/solix.hub\"))()", "likes": 1, "dislikes": 0 },
-          "omgshit blox fruit": { "code": "getgenv().Settings = { JoinTeam = \"Pirates\"; Translator = true; } getgenv().Mode = \"Old UI\" loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua\"))()", "likes": 3, "dislikes": 0 },
-          "speed hub x (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua\", true))()", "likes": 1, "dislikes": 0 },
-          "dragonhub hop server blox fruit": { "code": "repeat wait() until game:IsLoaded() and game.Players.LocalPlayer getgenv().team = \"Pirates\" loadstring(game:HttpGet(\"https://raw.githubusercontent.com/luacoder-byte/DragonHub/refs/heads/main/DragonHubHopServer.lua\"))()", "likes": 0, "dislikes": 0 },
-          "real kid hub blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/realkidhub/realkid/refs/heads/main/main.lua\"))()", "likes": 5, "dislikes": 1 },
-          "gravity hub blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua\"))()", "likes": 2, "dislikes": 1 },
-          "realz hub v2 blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/UCT-hub/main/refs/heads/main/redz-v2\"))()", "likes": 1, "dislikes": 1 },
-          "kexxxx hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/premiumbuddy/kex/refs/heads/main/kexxxx\"))()", "likes": 0, "dislikes": 0 },
-          "ouroboros (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/joustingmatch/Ouroboros/main/loader.lua\"))()", "likes": 0, "dislikes": 0 },
-          "hinishi hub blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/Freemium.lua\"))()", "likes": 0, "dislikes": 0 },
-          "cloverhub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/napun87/stealanegg/refs/heads/main/clover.lua\"))()", "likes": 0, "dislikes": 0 },
-          "vhieu blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/hieuhieu989/Vihieu-dzai-hub/refs/heads/main/v4\"))()", "likes": 1, "dislikes": 0 },
-          "virtuososvisualedits (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/virtuososvisualedits-prog/Ww/refs/heads/main/final-obfuscated.lua\"))()", "likes": 2, "dislikes": 0 },
-          "vxezestudio (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://vxezestudio.online/api/scripts/script_G5CGjqj2X3rOS/stream/init\"))()", "likes": 0, "dislikes": 0 },
-          "foxname (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/Fn-stealanegg.lua\"))()", "likes": 1, "dislikes": 0 },
-          "onhub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/ronnei/freemium/refs/heads/main/loader.lua\"))()", "likes": 0, "dislikes": 1 },
-          "ajjans (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/virtuososvisualedits-prog/Ww/refs/heads/main/final-obfuscated.lua\"))()", "likes": 2, "dislikes": 0 },
-          "zeroin (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://zeroinhub.com/api/script\"))()", "likes": 1, "dislikes": 1 },
-          "realkidhub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/realkidhub/realkid/refs/heads/main/main.lua\"))()", "likes": 2, "dislikes": 3 },
-          "script nhặt lá cây": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/phu429054-maker/Hoangtt03/refs/heads/main/clean%20all%20the%20leaves.lua.txt\",true))()", "likes": 2, "dislikes": 1 },
-          "lennon hub v2 (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/napun87/stealanegg/refs/heads/main/lemonhubV2.lua\"))()", "likes": 4, "dislikes": 9 },
-          "blox fruit update 30": { "code": "loadstring(game:HttpGet(\"https://isnahamzah.site/SubscribeYTisnahamzah/gantenghub30\"))()", "likes": 0, "dislikes": 0 },
-          "fyy (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://FyyCommunity.my.id\"))()", "likes": 3, "dislikes": 0 },
-          "client roblox detail qt": { "code": "https://drive.google.com/file/d/1KXEtZYyaW2tkcHgbUzMLTBu795DVBiQ3/view?usp=drivesdk", "likes": 0, "dislikes": 0 },
-          "client roblox detail vng": { "code": "https://drive.google.com/file/d/1fjKmLIlKDpXWWjrDunb3izjWbUU11Uqx/view?usp=drivesdk", "likes": 0, "dislikes": 0 },
-          "bin-hub hop sever (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/bn130189-lgtm/Script-hop-sever-/main/script.lua\"))()", "likes": 2, "dislikes": 1 },
-          "auto nhặt rương blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/bn130189-lgtm/Script-hop-sv/refs/heads/main/Auto-nhat-ruong\"))()", "likes": 1, "dislikes": 0 },
-          "kadit9999 (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/kadit9999/stealanegg/refs/heads/main/stopped.lua\"))()", "likes": 2, "dislikes": 3 },
-          "bacon hub (blox fruit)": { "code": "getgenv().team = \"Pirates\" loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Bloxfruits.lua\"))()", "likes": 4, "dislikes": 1 },
-          "miranda v2": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/stealaeggs\"))()", "likes": 1, "dislikes": 1 },
-          "voidshell hub lite (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/VoidShell-null/VoidShell-Hub/refs/heads/main/Scripts/StealAnEgg.luau\"))()", "likes": 0, "dislikes": 0 },
-          "waguri mm2": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Waguriiiii/Murder-mystery-2/refs/heads/main/Waguri.lua\"))()", "likes": 4, "dislikes": 0 },
-          "foxname 99 đêm": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/FoxnameHub.lua\"))()", "likes": 3, "dislikes": 2 },
-          "horizon hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/kadit9999/stealanegg/refs/heads/main/stopped.lua\"))()", "likes": 0, "dislikes": 0 },
-          "zyphorahub": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/jdififjhdudis-del/ZZy/refs/heads/main/ZZy.lua\"))()", "likes": 0, "dislikes": 0 },
-          "bk's hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://api.luarmor.net/files/v4/loaders/9ee4edde227ac85f50872bf9e4226508.lua\"))()", "likes": 2, "dislikes": 1 },
-          "tổng hợp 4 script (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Darkness-KingScripts/Steal-a-egg/refs/heads/main/Darknesshub\"))()", "likes": 8, "dislikes": 0 },
-          "rezzy hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Roman666Cabj/Nether/refs/heads/main/RezzyStealAnEgg.lua\"))()", "likes": 1, "dislikes": 0 },
-          "night hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/StealAnEggs.luau\"))()", "likes": 3, "dislikes": 0 },
-          "sena (trộm một quả trứng)": { "code": "print(\"Mã nguồn cho sena đang cập nhật!\")", "likes": 1, "dislikes": 2 },
-          "blyxohub (trộm một quả trứng)": { "code": "print(\"Mã nguồn cho blyxohub đang cập nhật!\")", "likes": 4, "dislikes": 0 },
-          "chilli (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/kadit9999/stealanegg/refs/heads/main/chilly.lua\"))()", "likes": 7, "dislikes": 2 },
-          "onxy mm2": { "code": "loadstring(game:HttpGet(\"https://onyxscripts.xyz\"))()", "likes": 3, "dislikes": 0 },
-          "linkhive blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/JustParadozCode/LinkHive---Scripts/refs/heads/main/script.lua\"))()", "likes": 2, "dislikes": 2 },
-          "glin't hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://flowauth.net/v1/loaders/6824c37a4078d7d311677732e231edaa.lua\"))()", "likes": 1, "dislikes": 0 },
-          "limbo hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://limbohub.my.id/loader.lua\"))()", "likes": 2, "dislikes": 0 }
-        };
+        function checkKey() {
+            const userKey = document.getElementById('key-input').value.trim();
+            const errorMsg = document.getElementById('error-msg');
 
-        function renderScripts(data) {
-            const grid = document.getElementById('scriptGrid');
-            grid.innerHTML = '';
-
-            for (const [name, info] of Object.entries(data)) {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div>
-                        <h3>${name}</h3>
-                        <div class="stats">
-                            <span>👍 Thích: ${info.likes}</span>
-                            <span>👎 Không thích: ${info.dislikes}</span>
-                        </div>
-                    </div>
-                    <button class="btn-copy" onclick="copyCode(this, \`${info.code}\`)">📋 Copy Script</button>
-                `;
-                grid.appendChild(card);
+            if (validKeys.includes(userKey)) {
+                // Ẩn bảng nhập key, hiện bảng script lên mượt mà không cần load lại trang
+                document.getElementById('auth-container').style.display = 'none';
+                document.getElementById('script-section').style.display = 'block';
+            } else {
+                errorMsg.style.display = 'block';
             }
         }
 
-        function filterScripts() {
-            const keyword = document.getElementById('searchBox').value.toLowerCase();
-            const filtered = {};
-            for (const [name, info] of Object.entries(scriptsData)) {
-                if (name.toLowerCase().includes(keyword)) {
-                    filtered[name] = info;
-                }
-            }
-            renderScripts(filtered);
+        function copyText(button) {
+            const textarea = button.previousElementSibling;
+            textarea.select();
+            document.execCommand('copy');
+            button.innerText = "Đã Copy Thành Công! ✅";
+            setTimeout(() => { button.innerText = "Copy Script"; }, 2000);
         }
-
-        function copyCode(btn, code) {
-            navigator.clipboard.writeText(code).then(() => {
-                btn.innerText = '✨ Đã Copy!';
-                btn.classList.add('btn-copied');
-                
-                const toast = document.getElementById('toast');
-                toast.style.display = 'block';
-                
-                setTimeout(() => {
-                    btn.innerText = '📋 Copy Script';
-                    btn.classList.remove('btn-copied');
-                    toast.style.display = 'none';
-                }, 1500);
-            });
-        }
-
-        // Khởi chạy hiển thị ban đầu
-        renderScripts(scriptsData);
     </script>
 </body>
 </html>
