@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIN HUB - Phân Trang Script</title>
+    <title>BIN HUB - Kho Script Chính Chủ</title>
     <style>
         body { 
             background: #0b0f19; 
@@ -16,7 +16,7 @@
             margin: 0; 
         }
         
-        /* Khung nhập Key */
+        /* Khung nhập Key ban đầu */
         .auth-card { 
             background: #131b2e; padding: 30px; border-radius: 20px; 
             text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
@@ -45,45 +45,68 @@
         .btn-submit { background: #10b981; color: white; border: none; cursor: pointer; width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; transition: 0.3s; }
         .btn-submit:hover { background: #059669; }
 
-        /* Giao diện Kho Script */
+        /* Giao diện Kho Script chính thức (Ẩn lúc đầu) */
         #script-container { 
-            display: none; width: 100%; max-width: 480px; padding: 20px; box-sizing: border-box; 
+            display: none; width: 100%; max-width: 440px; padding: 20px; box-sizing: border-box; 
         }
+
+        /* Vòng tròn neon phát sáng y hệt hình mẫu */
+        .neon-circle-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .neon-circle {
+            width: 70px;
+            height: 70px;
+            border: 3px solid #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5), inset 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
         .header-hub { text-align: center; margin-bottom: 20px; }
         .header-hub h1 { 
-            background: linear-gradient(45deg, #06b6d4, #3b82f6); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; font-size: 1.8rem; 
+            color: #2dd4bf; 
+            margin: 0; font-size: 1.6rem; 
+            font-weight: 800;
+            letter-spacing: 1px;
         }
-        .header-hub p { color: #9ca3af; font-size: 0.8rem; margin-top: 5px; }
+        .header-hub p { color: #9ca3af; font-size: 0.75rem; margin-top: 5px; }
         
-        /* Thẻ Script item */
+        /* Thẻ Script card chuẩn mẫu */
         .script-card { 
-            background: #131b2e; border: 1px solid rgba(99, 102, 241, 0.2); 
+            background: #131b2e; border: 1px solid rgba(45, 212, 191, 0.15); 
             border-radius: 16px; padding: 15px; margin-bottom: 15px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); 
         }
-        .script-title { font-weight: bold; color: #38bdf8; margin-bottom: 10px; font-size: 0.95rem; }
-        .reaction-row { display: flex; justify-content: space-between; font-size: 0.8rem; color: #9ca3af; margin-bottom: 10px; }
+        .script-title { font-weight: bold; color: #f3f4f6; margin-bottom: 8px; font-size: 0.9rem; }
+        .reaction-row { display: flex; justify-content: space-between; font-size: 0.75rem; color: #9ca3af; margin-bottom: 8px; }
         
+        /* Ô textarea dài xuống, chữ xanh ngọc, cuộn ngang mượt */
         textarea { 
-            width: 100%; height: 65px; background: #05070a; color: #34d399; 
+            width: 100%; height: 55px; background: #05070a; color: #34d399; 
             border: 1px solid #1e293b; border-radius: 8px; padding: 8px; 
-            font-family: monospace; font-size: 0.75rem; resize: none; box-sizing: border-box; 
+            font-family: monospace; font-size: 0.7rem; 
+            white-space: pre; overflow-x: auto; 
+            box-sizing: border-box; resize: none; 
         }
+        
+        /* Nút Copy xanh ngọc chuyển sắc y hệt mẫu */
         .copy-btn { 
-            background: linear-gradient(45deg, #06b6d4, #3b82f6); color: white; border: none; 
-            padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; 
+            background: linear-gradient(90deg, #06b6d4, #3b82f6); color: white; border: none; 
+            padding: 10px; border-radius: 10px; cursor: pointer; font-weight: bold; 
             width: 100%; margin-top: 10px; transition: 0.3s; font-size: 0.85rem; 
         }
         .copy-btn:hover { opacity: 0.9; }
 
-        /* Thanh phân trang (Pagination) */
+        /* Thanh phân trang */
         .pagination { display: flex; justify-content: center; gap: 8px; margin: 20px 0 10px 0; }
         .page-btn { 
             background: #131b2e; color: #9ca3af; border: 1px solid #1e293b; 
             padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; 
+            font-size: 0.8rem;
         }
-        .page-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+        .page-btn.active { background: #06b6d4; color: white; border-color: #06b6d4; }
         .page-btn:hover { background: #1e293b; color: white; }
 
         .page-content { display: none; }
@@ -95,30 +118,35 @@
     <!-- MÀN HÌNH NHẬP KEY -->
     <div class="auth-card" id="auth-container">
         <h1>BIN HUB SYSTEM</h1>
-        <p>Nhập Key để mở khóa kho Script phân trang!</p>
+        <p>Nhập Key để mở khóa kho Script!</p>
         <input type="text" id="key-input" placeholder="Nhập Key của bạn vào đây...">
         <button class="btn btn-key" onclick="window.open('https://discord.gg/uqhEpzXy9q', '_blank')">Lấy Key Từ Bot Discord</button>
         <button class="btn-submit" onclick="checkKey()">Xác Nhận Key</button>
         <p id="error-msg" style="color: #ef4444; margin-top: 10px; display: none;">Sai Key rồi bạn ơi!</p>
     </div>
 
-    <!-- MÀN HÌNH KHO SCRIPT CÓ PHÂN TRANG -->
+    <!-- MÀN HÌNH CHÍNH (GIỐNG HỆT HÌNH MẪU + CÓ PHÂN TRANG) -->
     <div id="script-container">
+        <!-- Vòng tròn neon phát sáng -->
+        <div class="neon-circle-box">
+            <div class="neon-circle"></div>
+        </div>
+
         <div class="header-hub">
             <h1>BIN HUB SCRIPTS</h1>
-            <p>Hệ thống kho script phân trang chuyên nghiệp</p>
+            <p>Kho lưu trữ script tổng hợp giao diện cực chất</p>
         </div>
 
         <!-- TRANG 1 -->
         <div class="page-content active" id="page-1">
             <div class="script-card">
-                <div class="script-title">🎮 Quantum Blox Fruit (Trang 1)</div>
+                <div class="script-title">🎮 Quantum Blox Fruit</div>
                 <div class="reaction-row"><span>👍 Thích: 4</span><span>👎 Không thích: 0</span></div>
                 <textarea readonly>loadstring(game:HttpGet('https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua'))()</textarea>
                 <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
             </div>
             <div class="script-card">
-                <div class="script-title">🎮 Banana Hub Blox Fruit (Trang 1)</div>
+                <div class="script-title">🎮 Banana Hub Blox Fruit</div>
                 <div class="reaction-row"><span>👍 Thích: 5</span><span>👎 Không thích: 1</span></div>
                 <textarea readonly>repeat wait() until game:IsLoaded() loadstring(game:HttpGet('https://raw.githubusercontent.com/obiyeuim/vthangsitink/main/BananaHub.lua'))()</textarea>
                 <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
@@ -128,13 +156,13 @@
         <!-- TRANG 2 -->
         <div class="page-content" id="page-2">
             <div class="script-card">
-                <div class="script-title">🎮 Hoai (Trộm Một Quả Trứng) (Trang 2)</div>
+                <div class="script-title">🎮 Hoai (Trộm Một Quả Trứng)</div>
                 <div class="reaction-row"><span>👍 Thích: 1</span><span>👎 Không thích: 0</span></div>
                 <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Hoai.lua"))()</textarea>
                 <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
             </div>
             <div class="script-card">
-                <div class="script-title">🎮 Solix Hub (Trộm Một Quả Trứng) (Trang 2)</div>
+                <div class="script-title">🎮 Solix Hub (Trộm Một Quả Trứng)</div>
                 <div class="reaction-row"><span>👍 Thích: 1</span><span>👎 Không thích: 0</span></div>
                 <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Solix.lua"))()</textarea>
                 <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
@@ -153,9 +181,9 @@
 
         <!-- THANH CHUYỂN TRANG -->
         <div class="pagination">
-            <button class="page-btn active" onclick="switchPage(1)">Trang 1</button>
-            <button class="page-btn" onclick="switchPage(2)">Trang 2</button>
-            <button class="page-btn" onclick="switchPage(3)">Trang 3</button>
+            <button class="page-btn active" onclick="switchPage(1, event)">Trang 1</button>
+            <button class="page-btn" onclick="switchPage(2, event)">Trang 2</button>
+            <button class="page-btn" onclick="switchPage(3, event)">Trang 3</button>
         </div>
 
         <button class="btn" style="background:#374151; margin-top:20px;" onclick="location.reload()">🔒 Khóa Lại (Đổi Key)</button>
@@ -184,16 +212,13 @@
             setTimeout(() => { button.innerText = "Copy Script"; }, 2000);
         }
 
-        function switchPage(pageNum) {
-            // Ẩn tất cả các trang
+        function switchPage(pageNum, event) {
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => page.classList.remove('active'));
 
-            // Bỏ active tất cả các nút
             const buttons = document.querySelectorAll('.page-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Hiện trang được chọn và làm sáng nút tương ứng
             document.getElementById('page-' + pageNum).classList.add('active');
             event.target.classList.add('active');
         }
