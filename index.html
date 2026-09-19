@@ -124,18 +124,23 @@
             msgDiv.innerText = 'Đang kiểm tra key...';
 
             try {
-                // Đọc dữ liệu key trực tiếp từ kho mây JSONBin của ní
-                const response = await fetch('https://api.jsonbin.io/v3/b/68ab89d0aeaf6210605ae01efb/latest?t=' + Date.now());
+                // Gọi API lấy dữ liệu trực tiếp từ JSONBin kèm theo khóa xác thực
+                const response = await fetch('https://api.jsonbin.io/v3/b/68ab89d0aeaf6210605ae01efb/latest', {
+                    headers: {
+                        'X-Master-Key': '$2a$10$3AlhtNYOs0IRyZ24tB5HiExY7toGZm7imP.J44sQuoifaNH2GyjRS'
+                    }
+                });
+
                 if (!response.ok) {
                     throw new Error("Không thể kết nối cơ sở dữ liệu!");
                 }
                 
                 const result = await response.json();
-                const validKeys = result.record; // Lấy danh sách key từ record
+                const validKeys = result.record; // Lấy danh sách key từ record của JSONBin
                 const now = Date.now();
 
                 // Kiểm tra key có tồn tại và chưa hết hạn không
-                if (validKeys[userKey] && validKeys[userKey] > now) {
+                if (validKeys && validKeys[userKey] && validKeys[userKey] > now) {
                     msgDiv.style.color = '#10b981';
                     msgDiv.innerText = '🎉 Chính xác! Đang chuyển hướng vào kho script...';
                     
