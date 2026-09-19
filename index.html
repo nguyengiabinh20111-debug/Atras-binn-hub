@@ -96,79 +96,15 @@
             transform: translateY(-2px);
         }
 
-        .btn-unlock {
-            background: linear-gradient(135deg, #10b981, #059669);
+        .btn-support {
+            background: #374151;
             color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            margin-top: 5px;
         }
 
-        .btn-unlock:hover {
+        .btn-support:hover {
+            background: #4b5563;
             transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
-        #mainContent {
-            display: none;
-            text-align: left;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .script-box {
-            margin-top: 15px;
-        }
-
-        .script-box label {
-            font-size: 0.85rem;
-            color: #a5b4fc;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .code-area {
-            background: #05070a;
-            border: 1px solid #1e293b;
-            padding: 12px;
-            border-radius: 10px;
-            color: #34d399;
-            font-family: monospace;
-            font-size: 0.85rem;
-            word-break: break-all;
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .copy-btn {
-            background: #6366f1;
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-            float: right;
-            margin-top: 8px;
-            transition: 0.2s;
-        }
-
-        .copy-btn:hover {
-            background: #4f46e5;
-        }
-
-        .success-badge {
-            background: rgba(16, 185, 129, 0.15);
-            color: #34d399;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-            border: 1px solid rgba(16, 185, 129, 0.3);
         }
     </style>
 </head>
@@ -179,66 +115,22 @@
             <h1>BIN HUB</h1>
             <p class="subtitle">Ultimate Roblox Script Hub</p>
 
-            <!-- MÀN HÌNH KHÓA -->
+            <!-- MÀN HÌNH KHÓA LIÊN KẾT ACL CLOUDS -->
             <div id="lockScreen" class="lock-screen">
                 <div style="font-size: 3rem; margin-bottom: -10px;">🔒</div>
-                <p>Bạn cần tham gia Server Discord chính thức để mở khóa toàn bộ mã nguồn Script VIP.</p>
+                <p>Hệ thống yêu cầu xác thực tài khoản Discord. Bạn bắt buộc phải ở trong Server mới được cấp mã Script!</p>
                 
-                <a href="https://discord.gg/uqhEpzXy9q" target="_blank" class="btn btn-discord" onclick="joinDiscord()">
-                    🚀 1. Tham Gia Server Discord
+                <!-- Trỏ trực tiếp về IP/Port Node.js trên ACL Clouds của bạn -->
+                <a href="http://141.11.237.69:30207" class="btn btn-discord">
+                    🔑 Đăng Nhập & Xác Thực Discord
                 </a>
 
-                <button class="btn btn-unlock" onclick="unlockScript()">
-                    ✨ 2. Tôi Đã Vào - Mở Khóa Ngay
-                </button>
-                
-                <p id="alertMsg" style="color: #f87171; font-size: 0.8rem; display: none; margin-top: 5px;">
-                    ⚠️ Vui lòng bấm vào nút tham gia Discord trước!
-                </p>
-            </div>
-
-            <!-- NỘI DUNG SCRIPT -->
-            <div id="mainContent">
-                <div class="success-badge">✅ Đã mở khóa thành công kho Script!</div>
-
-                <div class="script-box">
-                    <label>🔥 Blox Fruits Script</label>
-                    <div class="code-area" id="scriptText">getgenv().team = "Pirates"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Bloxfruits.lua"))()</div>
-                    <button class="copy-btn" onclick="copyCode()">Copy Script</button>
-                </div>
+                <a href="https://discord.gg/uqhEpzXy9q" target="_blank" class="btn btn-support">
+                    🚀 Tham Gia Server Discord Ngay
+                </a>
             </div>
         </div>
     </div>
 
-    <script>
-        let clickedDiscord = false;
-
-        function joinDiscord() {
-            clickedDiscord = true;
-            document.getElementById('alertMsg').style.display = 'none';
-        }
-
-        function unlockScript() {
-            if (!clickedDiscord) {
-                document.getElementById('alertMsg').style.display = 'block';
-                return;
-            }
-
-            // Ẩn màn hình khóa, hiện nội dung (Không lưu vào bộ nhớ máy nữa)
-            document.getElementById('lockScreen').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-        }
-
-        function copyCode() {
-            const code = document.getElementById('scriptText').innerText;
-            navigator.clipboard.writeText(code);
-            const btn = document.querySelector('.copy-btn');
-            btn.innerText = "Đã Copy! 🔥";
-            setTimeout(() => {
-                btn.innerText = "Copy Script";
-            }, 2000);
-        }
-    </script>
 </body>
 </html>
