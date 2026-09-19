@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIN HUB - Kho Script Chính Chủ</title>
+    <title>ATRAS BINN - Kho Script Chính Chủ</title>
     <style>
         body { 
             background: #0b0f19; color: #fff; font-family: 'Poppins', sans-serif; 
@@ -42,10 +42,10 @@
         }
         .copy-btn:hover { opacity: 0.9; }
 
-        .pagination { display: flex; justify-content: center; gap: 5px; margin: 20px 0 10px 0; flex-wrap: wrap; }
+        .pagination { display: flex; justify-content: center; gap: 6px; margin: 20px 0 10px 0; flex-wrap: wrap; }
         .page-btn { 
             background: #131b2e; color: #9ca3af; border: 1px solid #1e293b; 
-            padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.75rem;
+            padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.8rem;
         }
         .page-btn.active { background: #06b6d4; color: white; border-color: #06b6d4; }
         .page-btn:hover { background: #1e293b; color: white; }
@@ -70,17 +70,16 @@
             <p>Kho lưu trữ tổng hợp 48 Script cực chất</p>
         </div>
 
-        <!-- Danh sách script sẽ được tự động load vào đây -->
+        <!-- Danh sách script tự động load -->
         <div id="list-card-container"></div>
 
-        <!-- Thanh phân trang tự động -->
+        <!-- Thanh phân trang -->
         <div class="pagination" id="pagination-container"></div>
 
         <button class="btn-back" onclick="window.location.href='index.html'">🔒 Khóa Lại (Đổi Key)</button>
     </div>
 
     <script>
-        // Dữ liệu 48 script của bạn nhúng trực tiếp vào đây
         const scriptsData = {
   "quantum blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua\"))()", "likes": 4, "dislikes": 0 },
   "banana hub blox fruit": { "code": "repeat wait() until game:IsLoaded() and game.Players.LocalPlayer getgenv().Team = \"Marines\" loadstring(game:HttpGet(\"https://raw.githubusercontent.com/obiyeueim/vthangsitink/main/BananaHub.lua\"))()", "likes": 5, "dislikes": 0 },
@@ -136,7 +135,7 @@
   "limbo hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://limbohub.my.id/loader.lua\"))()", "likes": 2, "dislikes": 0 }
         };
 
-        const itemsPerPage = 6; // 6 script mỗi trang
+        const itemsPerPage = 10; // Thay đổi thành 10 script mỗi trang
         const scriptKeys = Object.keys(scriptsData);
         let currentPage = 1;
 
@@ -188,7 +187,6 @@
             setTimeout(() => { button.innerText = "Copy Script"; }, 2000);
         }
 
-        // Chạy lần đầu khi load trang
         renderPage(1);
     </script>
 </body>
