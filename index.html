@@ -95,7 +95,7 @@
         <h1>BIN HUB</h1>
         <p>Hệ thống xác thực key cá nhân 24h từ Bot Discord.</p>
         
-        <!-- Nút hướng dẫn lấy key nhanh -->
+        <!-- Nút lấy key đưa thẳng vào nhóm Discord -->
         <button type="button" class="btn btn-key" onclick="window.open('https://discord.gg/uqhEpzXy9q', '_blank')">🔑 Lấy Key Từ Bot Discord</button>
         
         <div style="margin: 15px 0; border-top: 1px solid #1e293b;"></div>
@@ -124,36 +124,28 @@
             msgDiv.innerText = 'Đang kiểm tra key...';
 
             try {
-                // Trang web sẽ đọc file expires.json trên GitHub của ní để check hạn key
-                const response = await fetch('expires.json?t=' + Date.now());
-                if (!response.ok) {
-                    throw new Error("Không thể kết nối tới cơ sở dữ liệu key!");
-                }
-                
-                const expiresData = await response.json();
-                const now = Date.now();
+                // Gọi API trực tiếp đến con bot đang chạy trên server của ní
+                const response = await fetch(`http://141.11.237.69:30207/verify?key=${encodeURIComponent(userKey)}`);
+                const data = await response.json();
 
-                // Kiểm tra xem key do người dùng nhập có tồn tại trong danh sách và thời gian hết hạn vẫn còn lớn hơn hiện tại hay không
-                // (Giả định cấu trúc expires.json lưu dạng: { "atras_xxxx": timestamp_hết_hạn })
-                if (expiresData[userKey] && expiresData[userKey] > now) {
+                if (data.success) {
                     msgDiv.style.color = '#10b981';
                     msgDiv.innerText = '🎉 Chính xác! Đang chuyển hướng vào kho script...';
                     
-                    // Lưu trạng thái hợp lệ để qua trang script
                     localStorage.setItem('binhub_auth', 'true');
                     
                     setTimeout(() => {
-                        window.location.href = 'script.html'; // Tên trang kho script của ní
+                        window.location.href = 'script.html'; // Tới trang kho script của ní
                     }, 1200);
                 } else {
                     msgDiv.style.color = '#ef4444';
-                    msgDiv.innerText = '❌ Key không đúng hoặc đã hết hạn (24h)!';
+                    msgDiv.innerText = '❌ ' + data.message;
                 }
 
             } catch (error) {
                 console.error(error);
                 msgDiv.style.color = '#ef4444';
-                msgDiv.innerText = '⚠️ Lỗi hệ thống xác thực!';
+                msgDiv.innerText = '⚠️ Lỗi kết nối đến máy chủ bot!';
             }
         }
     </script>
