@@ -11,7 +11,6 @@
         }
         #script-container { width: 100%; max-width: 440px; padding: 20px; box-sizing: border-box; }
 
-        /* Vòng tròn neon phát sáng y hệt hình mẫu */
         .neon-circle-box { display: flex; justify-content: center; margin-bottom: 15px; }
         .neon-circle {
             width: 70px; height: 70px; border: 3px solid #10b981; border-radius: 50%;
@@ -22,15 +21,13 @@
         .header-hub h1 { color: #2dd4bf; margin: 0; font-size: 1.6rem; font-weight: 800; letter-spacing: 1px; }
         .header-hub p { color: #9ca3af; font-size: 0.75rem; margin-top: 5px; }
         
-        /* Thẻ Script card chuẩn mẫu */
         .script-card { 
             background: #131b2e; border: 1px solid rgba(45, 212, 191, 0.15); 
             border-radius: 16px; padding: 15px; margin-bottom: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); 
         }
-        .script-title { font-weight: bold; color: #f3f4f6; margin-bottom: 8px; font-size: 0.9rem; }
+        .script-title { font-weight: bold; color: #f3f4f6; margin-bottom: 8px; font-size: 0.9rem; text-transform: capitalize; }
         .reaction-row { display: flex; justify-content: space-between; font-size: 0.75rem; color: #9ca3af; margin-bottom: 8px; }
         
-        /* Ô code dài rộng thoải mái, không bị ngắn ngủn */
         textarea { 
             width: 100%; height: 75px; background: #05070a; color: #34d399; 
             border: 1px solid #1e293b; border-radius: 8px; padding: 8px; 
@@ -38,7 +35,6 @@
             box-sizing: border-box; resize: none; 
         }
         
-        /* Nút Copy chuẩn mẫu */
         .copy-btn { 
             background: linear-gradient(90deg, #06b6d4, #3b82f6); color: white; border: none; 
             padding: 10px; border-radius: 10px; cursor: pointer; font-weight: bold; 
@@ -46,17 +42,13 @@
         }
         .copy-btn:hover { opacity: 0.9; }
 
-        /* Thanh phân trang */
-        .pagination { display: flex; justify-content: center; gap: 8px; margin: 20px 0 10px 0; flex-wrap: wrap; }
+        .pagination { display: flex; justify-content: center; gap: 5px; margin: 20px 0 10px 0; flex-wrap: wrap; }
         .page-btn { 
             background: #131b2e; color: #9ca3af; border: 1px solid #1e293b; 
-            padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.8rem;
+            padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 0.75rem;
         }
         .page-btn.active { background: #06b6d4; color: white; border-color: #06b6d4; }
         .page-btn:hover { background: #1e293b; color: white; }
-
-        .page-content { display: none; }
-        .page-content.active { display: block; }
 
         .btn-back { 
             background: #374151; color: white; padding: 12px; border-radius: 10px; 
@@ -75,62 +67,119 @@
 
         <div class="header-hub">
             <h1>BIN HUB SCRIPTS</h1>
-            <p>Kho lưu trữ script tổng hợp giao diện cực chất</p>
+            <p>Kho lưu trữ tổng hợp 48 Script cực chất</p>
         </div>
 
-        <!-- TRANG 1 (Bạn có thể thêm nhiều script ở đây) -->
-        <div class="page-content active" id="page-1">
-            <div class="script-card">
-                <div class="script-title">🎮 Quantum Blox Fruit</div>
-                <div class="reaction-row"><span>👍 Thích: 4</span><span>👎 Không thích: 0</span></div>
-                <textarea readonly>loadstring(game:HttpGet('https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua'))()</textarea>
-                <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
-            </div>
-            <div class="script-card">
-                <div class="script-title">🎮 Banana Hub Blox Fruit</div>
-                <div class="reaction-row"><span>👍 Thích: 5</span><span>👎 Không thích: 1</span></div>
-                <textarea readonly>repeat wait() until game:IsLoaded() loadstring(game:HttpGet('https://raw.githubusercontent.com/obiyeuim/vthangsitink/main/BananaHub.lua'))()</textarea>
-                <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
-            </div>
-        </div>
+        <!-- Danh sách script sẽ được tự động load vào đây -->
+        <div id="list-card-container"></div>
 
-        <!-- TRANG 2 -->
-        <div class="page-content" id="page-2">
-            <div class="script-card">
-                <div class="script-title">🎮 Hoai (Trộm Một Quả Trứng)</div>
-                <div class="reaction-row"><span>👍 Thích: 1</span><span>👎 Không thích: 0</span></div>
-                <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Hoai.lua"))()</textarea>
-                <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
-            </div>
-            <div class="script-card">
-                <div class="script-title">🎮 Solix Hub (Trộm Một Quả Trứng)</div>
-                <div class="reaction-row"><span>👍 Thích: 1</span><span>👎 Không thích: 0</span></div>
-                <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Solix.lua"))()</textarea>
-                <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
-            </div>
-        </div>
-
-        <!-- TRANG 3 -->
-        <div class="page-content" id="page-3">
-            <div class="script-card">
-                <div class="script-title">🎮 Script VIP Độc Quyền</div>
-                <div class="reaction-row"><span>👍 Thích: 10</span><span>👎 Không thích: 0</span></div>
-                <textarea readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/VipScript.lua"))()</textarea>
-                <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
-            </div>
-        </div>
-
-        <!-- THANH PHÂN TRANG -->
-        <div class="pagination">
-            <button class="page-btn active" onclick="switchPage(1, event)">Trang 1</button>
-            <button class="page-btn" onclick="switchPage(2, event)">Trang 2</button>
-            <button class="page-btn" onclick="switchPage(3, event)">Trang 3</button>
-        </div>
+        <!-- Thanh phân trang tự động -->
+        <div class="pagination" id="pagination-container"></div>
 
         <button class="btn-back" onclick="window.location.href='index.html'">🔒 Khóa Lại (Đổi Key)</button>
     </div>
 
     <script>
+        // Dữ liệu 48 script của bạn nhúng trực tiếp vào đây
+        const scriptsData = {
+  "quantum blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua\"))()", "likes": 4, "dislikes": 0 },
+  "banana hub blox fruit": { "code": "repeat wait() until game:IsLoaded() and game.Players.LocalPlayer getgenv().Team = \"Marines\" loadstring(game:HttpGet(\"https://raw.githubusercontent.com/obiyeueim/vthangsitink/main/BananaHub.lua\"))()", "likes": 5, "dislikes": 0 },
+  "hoshi (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/napun87/stealanegg/refs/heads/main/hosi.lua\"))()", "likes": 1, "dislikes": 0 },
+  "solix hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/napun87/script/refs/heads/main/solix.hub\"))()", "likes": 1, "dislikes": 0 },
+  "omgshit blox fruit": { "code": "getgenv().Settings = { JoinTeam = \"Pirates\"; Translator = true; } getgenv().Mode = \"Old UI\" loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua\"))()", "likes": 3, "dislikes": 0 },
+  "speed hub x (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua\", true))()", "likes": 1, "dislikes": 0 },
+  "dragonhub hop server blox fruit": { "code": "repeat wait() until game:IsLoaded() and game.Players.LocalPlayer getgenv().team = \"Pirates\" loadstring(game:HttpGet(\"https://raw.githubusercontent.com/luacoder-byte/DragonHub/refs/heads/main/DragonHubHopServer.lua\"))()", "likes": 0, "dislikes": 0 },
+  "real kid hub blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/realkidhub/realkid/refs/heads/main/main.lua\"))()", "likes": 5, "dislikes": 1 },
+  "gravity hub blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua\"))()", "likes": 2, "dislikes": 1 },
+  "realz hub v2 blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/UCT-hub/main/refs/heads/main/redz-v2\"))()", "likes": 1, "dislikes": 1 },
+  "kexxxx hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/premiumbuddy/kex/refs/heads/main/kexxxx\"))()", "likes": 0, "dislikes": 0 },
+  "ouroboros (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/joustingmatch/Ouroboros/main/loader.lua\"))()", "likes": 0, "dislikes": 0 },
+  "hinishi hub blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Dev-Hinishi/Hinishi-Hub/refs/heads/main/Freemium.lua\"))()", "likes": 0, "dislikes": 0 },
+  "cloverhub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/napun87/stealanegg/refs/heads/main/clover.lua\"))()", "likes": 0, "dislikes": 0 },
+  "vhieu blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/hieuhieu989/Vihieu-dzai-hub/refs/heads/main/v4\"))()", "likes": 1, "dislikes": 0 },
+  "virtuososvisualedits (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/virtuososvisualedits-prog/Ww/refs/heads/main/final-obfuscated.lua\"))()", "likes": 2, "dislikes": 0 },
+  "vxezestudio (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://vxezestudio.online/api/scripts/script_G5CGjqj2X3rOS/stream/init\"))()", "likes": 0, "dislikes": 0 },
+  "foxname (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/Fn-stealanegg.lua\"))()", "likes": 1, "dislikes": 0 },
+  "onhub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/ronnei/freemium/refs/heads/main/loader.lua\"))()", "likes": 0, "dislikes": 1 },
+  "ajjans (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/virtuososvisualedits-prog/Ww/refs/heads/main/final-obfuscated.lua\"))()", "likes": 2, "dislikes": 0 },
+  "zeroin (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://zeroinhub.com/api/script\"))()", "likes": 1, "dislikes": 1 },
+  "realkidhub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/realkidhub/realkid/refs/heads/main/main.lua\"))()", "likes": 2, "dislikes": 3 },
+  "script nhặt lá cây": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/phu429054-maker/Hoangtt03/refs/heads/main/clean%20all%20the%20leaves.lua.txt\",true))()", "likes": 2, "dislikes": 1 },
+  "lennon hub v2 (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/napun87/stealanegg/refs/heads/main/lemonhubV2.lua\"))()", "likes": 5, "dislikes": 9 },
+  "blox fruit update 30": { "code": "loadstring(game:HttpGet(\"https://isnahamzah.site/SubscribeYTisnahamzah/gantenghub30\"))()", "likes": 0, "dislikes": 0 },
+  "fyy (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://FyyCommunity.my.id\"))()", "likes": 3, "dislikes": 0 },
+  "client roblox detail qt": { "code": "https://drive.google.com/file/d/1KXEtZYyaW2tkcHgbUzMLTBu795DVBiQ3/view?usp=drivesdk", "likes": 0, "dislikes": 0 },
+  "client roblox detail vng": { "code": "https://drive.google.com/file/d/1fjKmLIlKDpXWWjrDunb3izjWbUU11Uqx/view?usp=drivesdk", "likes": 0, "dislikes": 0 },
+  "bin-hub hop sever (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/bn130189-lgtm/Script-hop-sever-/main/script.lua\"))()", "likes": 2, "dislikes": 1 },
+  "auto nhặt rương blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/bn130189-lgtm/Script-hop-sv/refs/heads/main/Auto-nhat-ruong\"))()", "likes": 1, "dislikes": 0 },
+  "kadit9999 (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/kadit9999/stealanegg/refs/heads/main/stopped.lua\"))()", "likes": 2, "dislikes": 3 },
+  "bacon hub (blox fruit)": { "code": "getgenv().team = \"Pirates\" loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Bloxfruits.lua\"))()", "likes": 4, "dislikes": 1 },
+  "miranda v2": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/miirandahub/loader/refs/heads/main/stealaeggs\"))()", "likes": 1, "dislikes": 1 },
+  "voidshell hub lite (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/VoidShell-null/VoidShell-Hub/refs/heads/main/Scripts/StealAnEgg.luau\"))()", "likes": 0, "dislikes": 0 },
+  "waguri mm2": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Waguriiiii/Murder-mystery-2/refs/heads/main/Waguri.lua\"))()", "likes": 4, "dislikes": 0 },
+  "foxname 99 đêm": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/FoxnameHub.lua\"))()", "likes": 3, "dislikes": 2 },
+  "horizon hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/kadit9999/stealanegg/refs/heads/main/stopped.lua\"))()", "likes": 0, "dislikes": 0 },
+  "zyphorahub": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/jdififjhdudis-del/ZZy/refs/heads/main/ZZy.lua\"))()", "likes": 0, "dislikes": 0 },
+  "bk's hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://api.luarmor.net/files/v4/loaders/9ee4edde227ac85f50872bf9e4226508.lua\"))()", "likes": 2, "dislikes": 1 },
+  "tổng hợp 4 script (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Darkness-KingScripts/Steal-a-egg/refs/heads/main/Darknesshub\"))()", "likes": 8, "dislikes": 0 },
+  "rezzy hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/Roman666Cabj/Nether/refs/heads/main/RezzyStealAnEgg.lua\"))()", "likes": 1, "dislikes": 0 },
+  "night hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/StealAnEggs.luau\"))()", "likes": 3, "dislikes": 0 },
+  "sena (trộm một quả trứng)": { "code": "print(\"Mã nguồn cho sena (trộm một quả trứng) đang cập nhật!\")", "likes": 1, "dislikes": 2 },
+  "blyxohub (trộm một quả trứng)": { "code": "print(\"Mã nguồn cho blyxohub (trộm một quả trứng) đang cập nhật!\")", "likes": 4, "dislikes": 0 },
+  "zyphorahub (trộm một quả trứng)": { "code": "print(\"Mã nguồn cho zyphorahub (trộm một quả trứng) đang cập nhật!\")", "likes": 0, "dislikes": 0 },
+  "bk`s hub (trộm một quả trứng)": { "code": "print(\"Mã nguồn cho bk`s hub (trộm một quả trứng) đang cập nhật!\")", "likes": 0, "dislikes": 0 },
+  "kion": { "code": "blox fruit", "likes": 0, "dislikes": 0 },
+  "chilli (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/kadit9999/stealanegg/refs/heads/main/chilly.lua\"))()", "likes": 7, "dislikes": 2 },
+  "onxy mm2": { "code": "loadstring(game:HttpGet(\"https://onyxscripts.xyz\"))()", "likes": 3, "dislikes": 0 },
+  "linkhive blox fruit": { "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/JustParadozCode/LinkHive---Scripts/refs/heads/main/script.lua\"))()", "likes": 2, "dislikes": 2 },
+  "glin't hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://flowauth.net/v1/loaders/6824c37a4078d7d311677732e231edaa.lua\"))()", "likes": 1, "dislikes": 0 },
+  "limbo hub (trộm một quả trứng)": { "code": "loadstring(game:HttpGet(\"https://limbohub.my.id/loader.lua\"))()", "likes": 2, "dislikes": 0 }
+        };
+
+        const itemsPerPage = 6; // 6 script mỗi trang
+        const scriptKeys = Object.keys(scriptsData);
+        let currentPage = 1;
+
+        function renderPage(page) {
+            currentPage = page;
+            const container = document.getElementById('list-card-container');
+            container.innerHTML = '';
+
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const currentItems = scriptKeys.slice(start, end);
+
+            currentItems.forEach(name => {
+                const item = scriptsData[name];
+                const card = document.createElement('div');
+                card.className = 'script-card';
+                card.innerHTML = `
+                    <div class="script-title">🎮 ${name}</div>
+                    <div class="reaction-row"><span>👍 Thích: ${item.likes}</span><span>👎 Không thích: ${item.dislikes}</span></div>
+                    <textarea readonly>${item.code}</textarea>
+                    <button class="copy-btn" onclick="copyText(this)">Copy Script</button>
+                `;
+                container.appendChild(card);
+            });
+
+            renderPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderPagination() {
+            const paginationContainer = document.getElementById('pagination-container');
+            paginationContainer.innerHTML = '';
+            const totalPages = Math.ceil(scriptKeys.length / itemsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                btn.innerText = i;
+                btn.onclick = () => renderPage(i);
+                paginationContainer.appendChild(btn);
+            }
+        }
+
         function copyText(button) {
             const textarea = button.previousElementSibling;
             textarea.select();
@@ -139,17 +188,8 @@
             setTimeout(() => { button.innerText = "Copy Script"; }, 2000);
         }
 
-        function switchPage(pageNum, event) {
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(page => page.classList.remove('active'));
-
-            const buttons = document.querySelectorAll('.page-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById('page-' + pageNum).classList.add('active');
-            event.target.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        // Chạy lần đầu khi load trang
+        renderPage(1);
     </script>
 </body>
 </html>
