@@ -3,214 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIN HUB - Script Roblox</title>
+    <title>BIN HUB - Premium Roblox Scripts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: #131b2e;
-            --accent-color: #6366f1;
-            --accent-hover: #4f46e5;
-            --text-color: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: #1e293b;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background: radial-gradient(circle at center, #1a1c29 0%, #0b0f19 100%);
+            color: #f3f4f6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            justify-content: center;
+            padding: 15px;
         }
 
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 500px;
         }
 
-        header {
+        .card {
+            background: rgba(19, 27, 46, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.2);
             text-align: center;
-            margin: 40px 0;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
-            margin-bottom: 10px;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* Khung nội dung chính */
-        .content-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
         }
 
-        /* Trạng thái bị khóa */
-        .locked-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 15, 25, 0.95);
-            backdrop-filter: blur(8px);
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        /* Khóa / Mở khóa overlay */
+        .lock-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            z-index: 10;
-            text-align: center;
-            padding: 20px;
-            transition: opacity 0.3s ease;
+            gap: 15px;
         }
 
-        .locked-overlay h2 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .locked-overlay p {
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            max-width: 400px;
+        .lock-screen p {
+            color: #d1d5db;
+            font-size: 0.95rem;
             line-height: 1.5;
         }
 
-        /* Nút bấm */
         .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
+            font-size: 1rem;
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-            margin: 8px;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-discord {
             background-color: #5865F2;
-            box-shadow: 0 4px 12px rgba(88, 101, 242, 0.4);
+            color: white;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
         }
 
         .btn-discord:hover {
             background-color: #4752c4;
+            transform: translateY(-2px);
         }
 
-        .btn-success {
-            background-color: #10b981;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        .btn-unlock {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
         }
 
-        .btn-success:hover {
-            background-color: #059669;
+        .btn-unlock:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
-        /* Khu vực Script (Khi đã mở khóa) */
-        .script-section {
-            margin-bottom: 25px;
+        /* Phần Script sau khi mở khóa */
+        #mainContent {
+            display: none;
+            text-align: left;
+            animation: fadeIn 0.5s ease;
         }
 
-        .script-section h3 {
-            margin-bottom: 10px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .script-box {
+            margin-top: 15px;
+        }
+
+        .script-box label {
+            font-size: 0.85rem;
             color: #a5b4fc;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
         }
 
-        pre {
+        .code-area {
             background: #05070a;
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 8px;
-            overflow-x: auto;
+            border: 1px solid #1e293b;
+            padding: 12px;
+            border-radius: 10px;
             color: #34d399;
             font-family: monospace;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
+            word-break: break-all;
             position: relative;
+            margin-bottom: 15px;
         }
 
         .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #1e293b;
-            color: #fff;
+            background: #6366f1;
+            color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 6px 14px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 0.8rem;
+            font-weight: 600;
+            float: right;
+            margin-top: 8px;
+            transition: 0.2s;
         }
 
         .copy-btn:hover {
-            background: #334155;
+            background: #4f46e5;
+        }
+
+        .success-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <header>
+        <div class="card">
             <h1>BIN HUB</h1>
-            <p>Kho Script Roblox VIP - Miễn Phí & Cập Nhật Liên Tục</p>
-        </header>
+            <p class="subtitle">Ultimate Roblox Script Hub</p>
 
-        <div class="content-box">
-            <!-- Lớp phủ yêu cầu vào Discord -->
-            <div id="lockedOverlay" class="locked-overlay">
-                <h2>⚠️ Yêu Cầu Tham Gia Server Discord</h2>
-                <p>Để bảo vệ bản quyền và xem được toàn bộ mã nguồn Script đỉnh cao, bạn bắt buộc phải tham gia vào Server Discord của chúng tôi trước.</p>
+            <!-- MÀN HÌNH KHÓA (YÊU CẦU DISCORD) -->
+            <div id="lockScreen" class="lock-screen">
+                <div style="font-size: 3rem; margin-bottom: -10px;">🔒</div>
+                <p>Bạn cần tham gia Server Discord chính thức để mở khóa toàn bộ mã nguồn Script VIP.</p>
                 
-                <div>
-                    <!-- Nút 1: Link Discord của bạn -->
-                    <a href="https://discord.gg/uqhEpzXy9q" target="_blank" class="btn btn-discord" onclick="markJoinedDiscord()">
-                        1. Tham Gia Server Discord
-                    </a>
-                    
-                    <!-- Nút 2: Xác nhận mở khóa -->
-                    <button class="btn btn-success" onclick="verifyAndUnlock()">
-                        2. Tôi Đã Vào - Mở Khóa Ngay
-                    </button>
-                </div>
-                <p id="errorMsg" style="color: #ef4444; margin-top: 15px; font-size: 0.9rem; display: none;">
-                    Vui lòng bấm vào nút "Tham gia Server Discord" trước khi bấm mở khóa!
+                <!-- Bấm nút này sẽ mở link Discord VÀ tự động ghi nhận -->
+                <a href="https://discord.gg/uqhEpzXy9q" target="_blank" class="btn btn-discord" onclick="joinDiscord()">
+                    🚀 1. Tham Gia Server Discord
+                </a>
+
+                <!-- Nút xác nhận mở khóa ngay -->
+                <button class="btn btn-unlock" onclick="unlockScript()">
+                    ✨ 2. Tôi Đã Vào - Mở Khóa Ngay
+                </button>
+                
+                <p id="alertMsg" style="color: #f87171; font-size: 0.8rem; display: none; margin-top: 5px;">
+                    ⚠️ Vui lòng bấm vào nút tham gia Discord trước!
                 </p>
             </div>
 
-            <!-- Nội dung Script Test Blox Fruits -->
-            <div class="script-section">
-                <h3>🔥 Blox Fruits Script (Test)</h3>
-                <pre><code>getgenv().team = "Pirates"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Bloxfruits.lua"))()</code><button class="copy-btn" onclick="copyScript(this)">Copy</button></pre>
+            <!-- NỘI DUNG SCRIPT (HIỆN KHI ĐÃ MỞ KHÓA) -->
+            <div id="mainContent">
+                <div class="success-badge">✅ Đã mở khóa thành công kho Script!</div>
+
+                <div class="script-box">
+                    <label>🔥 Blox Fruits Script</label>
+                    <div class="code-area" id="scriptText">getgenv().team = "Pirates"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/refs/heads/main/Bloxfruits.lua"))()</div>
+                    <button class="copy-btn" onclick="copyCode()">Copy Script</button>
+                </div>
             </div>
         </div>
     </div>
@@ -218,44 +218,43 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BaconHub/hack/ref
     <script>
         let clickedDiscord = false;
 
-        function markJoinedDiscord() {
+        function joinDiscord() {
             clickedDiscord = true;
-            document.getElementById('errorMsg').style.display = 'none';
+            document.getElementById('alertMsg').style.display = 'none';
         }
 
-        function verifyAndUnlock() {
+        function unlockScript() {
             if (!clickedDiscord) {
-                document.getElementById('errorMsg').style.display = 'block';
+                document.getElementById('alertMsg').style.display = 'block';
                 return;
             }
 
-            // Lưu trạng thái vào trình duyệt
-            localStorage.setItem('binhub_unlocked', 'true');
-            
-            // Ẩn lớp khóa
-            document.getElementById('lockedOverlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('lockedOverlay').style.display = 'none';
-            }, 300);
+            // Lưu trạng thái vào bộ nhớ máy
+            localStorage.setItem('binhub_vip_unlocked', 'true');
+            showContent();
         }
 
-        // Tự động mở khóa nếu trình duyệt đã từng xác nhận trước đó
+        function showContent() {
+            document.getElementById('lockScreen').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+        }
+
+        // Tự động kiểm tra nếu đã mở khóa trước đó
         window.onload = function() {
-            if (localStorage.getItem('binhub_unlocked') === 'true') {
-                document.getElementById('lockedOverlay').style.display = 'none';
+            if (localStorage.getItem('binhub_vip_unlocked') === 'true') {
+                showContent();
             }
         }
 
-        // Nút copy code nhanh
-        function copyScript(button) {
-            const codeText = button.previousElementSibling.innerText;
-            navigator.clipboard.writeText(codeText);
-            button.innerText = "Đã Copy!";
+        function copyCode() {
+            const code = document.getElementById('scriptText').innerText;
+            navigator.clipboard.writeText(code);
+            const btn = document.querySelector('.copy-btn');
+            btn.innerText = "Đã Copy! 🔥";
             setTimeout(() => {
-                button.innerText = "Copy";
+                btn.innerText = "Copy Script";
             }, 2000);
         }
     </script>
 </body>
-  </html>
-
+</html>
